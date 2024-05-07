@@ -5,3 +5,6 @@
 <p>Tomorrow's min temperature: <%= tomorrow_forecast[:min_temp] %> K </p>
 <p>Tomorrow's max tempratur: <%= tomorrow_forecast[:max_temp] %> K </p>
 <p>Tomorrow's weather description: <%= tomorrow_forecast[:description] %> </p>
+  <% if from_cache %>
+    <p><em>(Result pulled from cache)</em></p>
+  <% end %>
