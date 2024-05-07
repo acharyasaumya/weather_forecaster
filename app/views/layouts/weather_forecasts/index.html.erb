@@ -49,30 +49,26 @@
   <script>
     $(document).ready(function() {
       $('#getForecastButton').click(function(e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault(); 
         
-        var address = $('#address').val(); // Get the zip code entered by the user
-
-        // Make AJAX request to fetch weather forecast
+        var address = $('#address').val(); 
         $.ajax({
           url: '/weather_forecasts/get_forecast',
           method: 'GET',
           data: { address: address },
           success: function(data) {
-            // Update the weather result section with the fetched forecast data
             $('#weatherResultContent').html(data);
-            // Show the weather result section
             $('#weatherResult').show();
           },
           error: function(xhr, status, error) {
-            console.error(error); // Log any errors to console
+            console.error(error); 
           }
         });
       });
 
       // Event handler for clicking the link to fetch tomorrow's weather
       $('#tomorrowWeatherLink').click(function(e) {
-        e.preventDefault(); // Prevent default link behavior
+        e.preventDefault();
 
         // Make AJAX request to fetch tomorrow's weather forecast
         $.ajax({
@@ -85,7 +81,7 @@
             $('#weatherResult').show();
           },
           error: function(xhr, status, error) {
-            console.error(error); // Log any errors to console
+            console.error(error); 
           }
         });
       });
