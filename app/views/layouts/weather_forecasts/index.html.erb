@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Weather Forecast</h5>
+          </div>
+          <div class="card-body">
+            <%= form_with(url: '/weather_forecasts/get_forecast', method: 'get', id: 'weatherForm') do %>
+              <div class="form-group">
+                <%= label_tag :address, 'Enter Address:' %>
+                <%= text_field_tag :address, nil, class: 'form-control', id: 'address', placeholder: 'Enter Address' %>
+              </div>
+              <%= button_tag 'Get Forecast', class: 'btn btn-primary', id: 'getForecastButton' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3" id="weatherResult" style="display:none;">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Weather Result</h5>
+          </div>
+          <div class="card-body" id="weatherResultContent">
+            <!-- Forecast result will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#getForecastButton').click(function(e) {
+        e.preventDefault(); // Prevent default form submission
+        
+        var address = $('#address').val(); // Get the zip code entered by the user
+
+        // Make AJAX request to fetch weather forecast
+        $.ajax({
+          url: '/weather_forecasts/get_forecast',
+          method: 'GET',
+          data: { address: address },
+          success: function(data) {
+            // Update the weather result section with the fetched forecast data
+            $('#weatherResultContent').html(data);
+            // Show the weather result section
+            $('#weatherResult').show();
+          },
+          error: function(xhr, status, error) {
+            console.error(error); // Log any errors to console
+          }
+        });
+      });
+
+      // Event handler for clicking the link to fetch tomorrow's weather
+      $('#tomorrowWeatherLink').click(function(e) {
+        e.preventDefault(); // Prevent default link behavior
+
+        // Make AJAX request to fetch tomorrow's weather forecast
+        $.ajax({
+          url: '/weather_forecasts/get_tomorrow_forecast',
+          method: 'GET',
+          success: function(data) {
+            // Update the weather result section with tomorrow's forecast data
+            $('#weatherResultContent').html(data);
+            // Show the weather result section
+            $('#weatherResult').show();
+          },
+          error: function(xhr, status, error) {
+            console.error(error); // Log any errors to console
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

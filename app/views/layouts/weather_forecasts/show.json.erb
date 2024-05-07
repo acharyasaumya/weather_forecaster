@@ -1,0 +1,9 @@
+<!-- app/views/weather_forecasts/show.json.erb -->
+{
+  "current_temperature": <%= @forecast['main']['temp'] %>,
+  <% if @forecast['main']['temp_max'] && @forecast['main']['temp_min'] %>
+  "high_temperature": <%= @forecast['main']['temp_max'] %>,
+  "low_temperature": <%= @forecast['main']['temp_min'] %>,
+  <% end %>
+  "cached_result": <%= @cached_result %>
+}
