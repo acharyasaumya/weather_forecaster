@@ -1,24 +1,19 @@
-# README
+# weather_forecaster
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Before running this application, make sure you have the following installed:
 
-Things you may want to cover:
+Ruby (version 2.6 or higher)
+Rails (version 6.0 or higher)
 
-* Ruby version
+Start the Rails server:
 
-* System dependencies
+Open your web browser and go to http://localhost:3000/weather_forecasts
 
-* Configuration
 
-* Database creation
+Enter your address with zip code in the provided input field and click "Get Forecast" to view the weather forecast.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Technologies Used
+Ruby on Rails
+HTML
+CSS (Bootstrap)
+JavaScript (jQuery)
